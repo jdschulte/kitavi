@@ -17,5 +17,6 @@ services:
       - POSTGRES_PASSWORD=YhqRd9aevo5!af
       - POSTGRES_USER=kitavi_user
       - POSTGRES_DB=kitavi_db
-  volumes:
-     kitavi-data:
+
+volumes:
+  kitavi-data:
