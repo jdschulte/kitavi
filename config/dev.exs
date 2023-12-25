@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :kitavi, Kitavi.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "kitavi_user",
+  password: "YhqRd9aevo5!af",
   hostname: "localhost",
   database: "kitavi_dev",
   stacktrace: true,

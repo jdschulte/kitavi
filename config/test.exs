@@ -6,8 +6,8 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :kitavi, Kitavi.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "kitavi_user",
+  password: "YhqRd9aevo5!af",
   hostname: "localhost",
   database: "kitavi_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
