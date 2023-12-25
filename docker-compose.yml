@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  # elixir:
+  #   image: elixir:1.15.7
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - .:/app:rw
+
+  postgres:
+    image: postgres:16.1
+    ports:
+      - 5432:5432
+    volumes:
+      - kitavi-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=YhqRd9aevo5!af
+      - POSTGRES_USER=kitavi_user
+      - POSTGRES_DB=kitavi_db
+  volumes:
+     kitavi-data:
