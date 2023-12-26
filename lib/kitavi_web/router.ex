@@ -10,20 +10,11 @@ defmodule KitaviWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", KitaviWeb do
     pipe_through :browser
 
     get "/", PageController, :home
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", KitaviWeb do
-  #   pipe_through :api
-  # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:kitavi, :dev_routes) do
