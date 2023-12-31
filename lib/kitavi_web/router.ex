@@ -13,7 +13,7 @@ defmodule KitaviWeb.Router do
   scope "/", KitaviWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/:name", PageController, :home
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
