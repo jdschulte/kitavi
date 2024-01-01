@@ -9,7 +9,7 @@ import Config
 
 config :kitavi,
   ecto_repos: [Kitavi.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 # Configures the endpoint
 config :kitavi, KitaviWeb.Endpoint,
