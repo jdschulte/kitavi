@@ -1,7 +1,7 @@
 defmodule KitaviWeb.PageController do
   use KitaviWeb, :controller
 
-  def home(conn, %{"name" => name}) do
-    render(conn, :home, name: name)
+  def home(conn, _params) do
+    render(conn, :home)
   end
 end
