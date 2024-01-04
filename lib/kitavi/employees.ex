@@ -7,6 +7,7 @@ defmodule Kitavi.Employees do
   alias Kitavi.Repo
 
   alias Kitavi.Employees.Employee
+  alias Kitavi.WorkAreas.WorkArea
 
   @doc """
   Returns the list of employees.
@@ -35,7 +36,9 @@ defmodule Kitavi.Employees do
       ** (Ecto.NoResultsError)
 
   """
-  def get_employee!(id), do: Repo.get!(Employee, id)
+  def get_employee!(id) do
+    Employee |> Repo.get!(id) |> Repo.preload(:work_areas)
+  end
 
   @doc """
   Creates a employee.
@@ -51,7 +54,7 @@ defmodule Kitavi.Employees do
   """
   def create_employee(attrs \\ %{}) do
     %Employee{}
-    |> Employee.changeset(attrs)
+    |> change_employee(attrs)
     |> Repo.insert()
   end
 
@@ -69,7 +72,7 @@ defmodule Kitavi.Employees do
   """
   def update_employee(%Employee{} = employee, attrs) do
     employee
-    |> Employee.changeset(attrs)
+    |> change_employee(attrs)
     |> Repo.update()
   end
 
@@ -99,6 +102,21 @@ defmodule Kitavi.Employees do
 
   """
   def change_employee(%Employee{} = employee, attrs \\ %{}) do
-    Employee.changeset(employee, attrs)
+    work_areas = list_work_areas_by_id(attrs["work_area_ids"])
+
+    employee
+    |> Repo.preload(:work_areas)
+    |> Employee.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:work_areas, work_areas)
+  end
+
+  @doc """
+  Returns the list of work areas.
+  and returns an empty list if no work areas exist.
+  """
+  def list_work_areas_by_id(nil), do: []
+
+  def list_work_areas_by_id(work_area_ids) do
+    Repo.all(from w in WorkArea, where: w.id in ^work_area_ids)
   end
 end

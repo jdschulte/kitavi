@@ -2,6 +2,7 @@ defmodule Kitavi.Employees.Employee do
   use Ecto.Schema
   import Ecto.Changeset
   alias Kitavi.Helpers.SchemaHelpers
+  alias Kitavi.WorkAreas.WorkArea
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -10,6 +11,10 @@ defmodule Kitavi.Employees.Employee do
     field :last_name, :string
     field :abbreviation, :string
     field :color, :string
+
+    many_to_many :work_areas, WorkArea,
+      join_through: "employee_work_areas",
+      on_replace: :delete
 
     timestamps(type: :utc_datetime)
   end

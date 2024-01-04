@@ -5,7 +5,7 @@ defmodule Kitavi.WorkAreas.WorkArea do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "work_area" do
+  schema "work_areas" do
     field :name, :string
     field :color, :string
     field :abbreviation, :string
@@ -13,7 +13,7 @@ defmodule Kitavi.WorkAreas.WorkArea do
     timestamps(type: :utc_datetime)
   end
 
-  @required_fields [:first_name, :abbreviation, :color]
+  @required_fields [:name, :abbreviation, :color]
 
   @doc false
   def changeset(work_area, attrs) do
@@ -21,6 +21,6 @@ defmodule Kitavi.WorkAreas.WorkArea do
     |> cast(attrs, @required_fields)
     |> validate_required(@required_fields)
     |> validate_length(:abbreviation, max: 2)
-    |> SchemaHelpers.validate_max_length([:first_name, :color])
+    |> SchemaHelpers.validate_max_length([:name, :color])
   end
 end

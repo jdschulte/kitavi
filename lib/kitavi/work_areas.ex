@@ -17,7 +17,7 @@ defmodule Kitavi.WorkAreas do
       [%WorkArea{}, ...]
 
   """
-  def list_work_area do
+  def list_work_areas do
     Repo.all(WorkArea)
   end
 
