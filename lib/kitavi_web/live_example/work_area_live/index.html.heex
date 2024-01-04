@@ -1,0 +1,43 @@
+<.header>
+  Listing Work area
+  <:actions>
+    <.link patch={~p"/work_area/new"}>
+      <.button>New Work area</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="work_area"
+  rows={@streams.work_area_collection}
+  row_click={fn {_id, work_area} -> JS.navigate(~p"/work_area/#{work_area}") end}
+>
+  <:col :let={{_id, work_area}} label="Name"><%= work_area.name %></:col>
+  <:col :let={{_id, work_area}} label="Abbreviation"><%= work_area.abbreviation %></:col>
+  <:col :let={{_id, work_area}} label="Color"><%= work_area.color %></:col>
+  <:action :let={{_id, work_area}}>
+    <div class="sr-only">
+      <.link navigate={~p"/work_area/#{work_area}"}>Show</.link>
+    </div>
+    <.link patch={~p"/work_area/#{work_area}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, work_area}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: work_area.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="work_area-modal" show on_cancel={JS.patch(~p"/work_area")}>
+  <.live_component
+    module={KitaviWeb.WorkAreaLive.FormComponent}
+    id={@work_area.id || :new}
+    title={@page_title}
+    action={@live_action}
+    work_area={@work_area}
+    patch={~p"/work_area"}
+  />
+</.modal>

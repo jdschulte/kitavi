@@ -14,7 +14,6 @@ defmodule KitaviWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    resources "/employees", EmployeeController
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
